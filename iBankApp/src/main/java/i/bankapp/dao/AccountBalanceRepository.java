@@ -26,4 +26,6 @@ public interface AccountBalanceRepository extends CrudRepository<AccountBalance,
 	@Modifying(clearAutomatically = true)
 	@Query("update AccountBalance set balance = balance-?2 where acctID=?1")
 	public void withdrawAmountByAcctID(int acctID, int balance);
+	
+	public AccountBalance getByAcctID(int acctID);
 }

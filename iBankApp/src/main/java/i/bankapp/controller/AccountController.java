@@ -131,8 +131,8 @@ public class AccountController {
 	}
 	
 	@GetMapping("/accountbalance/{acctID}")
-	public AccountBalance getAccountBalanceById(@PathVariable int acctID) {
-		return accountBalanceService.getAccountBalanceById(acctID);
+	public AccountBalance getAccountBalanceByAcctID(@PathVariable int acctID) {
+		return accountBalanceService.getAccountBalanceByAcctID(acctID);
 	}
 	
 	@PostMapping("/transactions")
@@ -148,7 +148,7 @@ public class AccountController {
 	@GetMapping("/account/{acctID}/accountSummary")
 	public List<Object> getAccountSummary(@PathVariable int acctID){
 		Accounts accounts = getAccountInfo(acctID);
-		AccountBalance accountBalance = getAccountBalanceById(acctID);
+		AccountBalance accountBalance = getAccountBalanceByAcctID(acctID);
 		List<Transactions> transactions = transactionsService.getAllTransactionsByAcctId(acctID);
 		List<Object> accountSummary = new ArrayList<>();
 		accountSummary.add(accounts);

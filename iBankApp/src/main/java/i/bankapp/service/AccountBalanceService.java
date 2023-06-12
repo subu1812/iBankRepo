@@ -33,8 +33,8 @@ public class AccountBalanceService {
 		return accountBalanceRepository.save(accountBalance);
 	}
 
-	public AccountBalance getAccountBalanceById(int acctID) {
-		return accountBalanceRepository.getById(acctID);
+	public AccountBalance getAccountBalanceByAcctID(int acctID) {
+		return accountBalanceRepository.getByAcctID(acctID);
 	}
 
 }

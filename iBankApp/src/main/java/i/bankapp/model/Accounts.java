@@ -40,7 +40,7 @@ public class Accounts {
     private AccountBalance accountBalance;
 	
 	@NonNull
-	@Pattern(regexp="^[a-zA-Z0-9\s]*$")
+	//@Pattern(regexp="^[a-zA-Z0-9\s]*$")
 	@Column(name = "ACCOUNT_NAME")
 	private String accountName;
 	

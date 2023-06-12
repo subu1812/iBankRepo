@@ -51,13 +51,12 @@ class IBankAppApplicationTests {
 		MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/iBank/account")
 				.contentType(MediaType.APPLICATION_JSON).content(inputJson)).andReturn();
 		MockHttpServletResponse httpServletResponse = mvcResult.getResponse();
-		System.out.println(httpServletResponse.getStatus());
 		assertEquals(HttpStatus.OK.value(),httpServletResponse.getStatus());
 	}
 
 	@Test
 	void fetchbyId() throws Exception {
-		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/iBank/account/1/balance");
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/iBank/account/1");
 		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
 		MockHttpServletResponse httpServletResponse = mvcResult.getResponse();
 		System.out.println(httpServletResponse.getStatus());

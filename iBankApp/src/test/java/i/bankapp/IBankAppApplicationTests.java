@@ -19,9 +19,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import i.bankapp.controller.AccountController;
-import i.bankapp.dao.AccountsRepository;
 import i.bankapp.dao.BeneficiaryRepository;
-import i.bankapp.model.Beneficiary;
 import i.bankapp.service.BeneficiaryService;
 
 @RunWith(SpringRunner.class)
@@ -103,7 +101,7 @@ class IBankAppApplicationTests {
 		assertEquals(HttpStatus.OK.value(),httpServletResponse);
 	}
 	
-	//@Test
+	@Test
 	void deletebyBeneficiaryId() throws Exception {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/iBank/account/1/deleteBeneficiary");
 		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();

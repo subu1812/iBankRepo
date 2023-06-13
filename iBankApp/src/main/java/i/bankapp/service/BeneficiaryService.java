@@ -18,7 +18,7 @@ public class BeneficiaryService {
 		return beneficiaryRepository.save(beneficiary);
 	}
 
-	public ResponseEntity<Beneficiary> updateBeneficiaryAccountId(int acctID, Beneficiary beneficiary) throws ResourceNotFoundException {
+	public ResponseEntity<Beneficiary> updateBeneficiaryByAcctID(int acctID, Beneficiary beneficiary) throws ResourceNotFoundException {
 		Beneficiary updateBeneficiary = beneficiaryRepository.findById(acctID)
                 .orElseThrow(() -> new ResourceNotFoundException("Beneficiary not exist with id: " + acctID));
 

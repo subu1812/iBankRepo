@@ -8,6 +8,6 @@ import i.bankapp.model.Beneficiary;
 
 @Repository
 public interface BeneficiaryRepository extends CrudRepository<Beneficiary, Integer>, JpaRepository<Beneficiary, Integer> {
-	
+
 
 }

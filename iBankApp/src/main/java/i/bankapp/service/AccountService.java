@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 
-import i.bankapp.dao.AccountBalanceRepository;
 import i.bankapp.dao.AccountsRepository;
 import i.bankapp.exception.ResourceNotFoundException;
 import i.bankapp.model.Accounts;

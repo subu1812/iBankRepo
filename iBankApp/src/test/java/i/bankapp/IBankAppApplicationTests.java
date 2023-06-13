@@ -19,6 +19,10 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import i.bankapp.controller.AccountController;
+import i.bankapp.dao.AccountsRepository;
+import i.bankapp.dao.BeneficiaryRepository;
+import i.bankapp.model.Beneficiary;
+import i.bankapp.service.BeneficiaryService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -32,6 +36,12 @@ class IBankAppApplicationTests {
 	
 	@Autowired
 	AccountController accountController;
+	
+	@Autowired
+	BeneficiaryRepository beneficiaryRepository;
+	
+	@Autowired
+	BeneficiaryService beneficiaryService;
 	
 	@Test
 	void createAccountsThroughAllLayer() throws Exception{
@@ -70,6 +80,57 @@ class IBankAppApplicationTests {
 	@Test
 	void fetchbyAccountBalanceId() throws Exception {
 		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/iBank/accountbalance/1");
+		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+		MockHttpServletResponse httpServletResponse = mvcResult.getResponse();
+		assertEquals(HttpStatus.OK.value(),httpServletResponse.getStatus());
+	}
+	
+	@Test
+	void createBeneficiaryThroughAllLayer() throws Exception {
+		String inputJson = "{\"id\":\"3\",\"acctID\": \"3\",\"beneficiaryAccountId\": \"123094355\",\"beneficiaryIFSCCode\" : \"IFSC00001\",\"beneficiaryName\":\"Sample 1\",\"status\":\"Active\" }";
+		MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/iBank/account/1/addBeneficiaryAccount")
+				.contentType(MediaType.APPLICATION_JSON).content(inputJson)).andReturn();
+		MockHttpServletResponse httpServletResponse = mvcResult.getResponse();
+		assertEquals(HttpStatus.OK.value(),httpServletResponse.getStatus());
+	} 
+	
+	@Test
+	void updatebyBeneficiaryId() throws Exception {
+		String inputJson = "{\"id\":\"2\",\"acctID\": \"1\",\"beneficiaryAccountId\": \"123094357\",\"beneficiaryIFSCCode\" : \"IFSC00001\",\"beneficiaryName\":\"Sample 1\",\"status\":\"Active\" }";
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.put("/iBank/account/1/updateBeneficiaryAccount/123094357").contentType(MediaType.APPLICATION_JSON).content(inputJson);
+		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+		MockHttpServletResponse httpServletResponse = mvcResult.getResponse();
+		assertEquals(HttpStatus.OK.value(),httpServletResponse);
+	}
+	
+	//@Test
+	void deletebyBeneficiaryId() throws Exception {
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/iBank/account/1/deleteBeneficiary");
+		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+		MockHttpServletResponse httpServletResponse = mvcResult.getResponse();
+		assertEquals(HttpStatus.OK.value(),httpServletResponse.getStatus());
+	}
+	
+	@Test
+	void createTransactionThroughAllLayer() throws Exception {
+		String inputJson = "{\"id\": \"4\",\"acctID\" :\"1\",\"date\" : \"2022-09-18\",\"type\" : \"Credit\",\"amount\": \"1000\",\"status\" : \"Success\",\"remarks\" : \"\"}";
+		MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/iBank/transactions")
+				.contentType(MediaType.APPLICATION_JSON).content(inputJson)).andReturn();
+		MockHttpServletResponse httpServletResponse = mvcResult.getResponse();
+		assertEquals(HttpStatus.OK.value(),httpServletResponse.getStatus());
+	}
+	
+	@Test
+	void fetchTrasactionbyAcccountId() throws Exception {
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/iBank/transactions/1");
+		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
+		MockHttpServletResponse httpServletResponse = mvcResult.getResponse();
+		assertEquals(HttpStatus.OK.value(),httpServletResponse.getStatus());
+	}
+	
+	@Test
+	void fetchAccountSummarybyAcccountId() throws Exception {
+		RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/iBank/account/1/accountSummary");
 		MvcResult mvcResult = mockMvc.perform(requestBuilder).andReturn();
 		MockHttpServletResponse httpServletResponse = mvcResult.getResponse();
 		assertEquals(HttpStatus.OK.value(),httpServletResponse.getStatus());

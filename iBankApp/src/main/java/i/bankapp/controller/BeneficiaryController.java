@@ -28,7 +28,7 @@ public class BeneficiaryController {
 	
 	@PutMapping("/account/{acctID}/updateBeneficiaryAccount/{beneficiaryAccountId}")
 	public ResponseEntity<Beneficiary> updateBeneficiaryAccountId(@PathVariable int acctID,@RequestBody Beneficiary beneficiary) throws ResourceNotFoundException{
-		return beneficiaryService.updateBeneficiaryAccountId(acctID,beneficiary);
+		return beneficiaryService.updateBeneficiaryByAcctID(acctID,beneficiary);
 	}    
 	
 	@DeleteMapping("/account/{acctID}/deleteBeneficiary")
